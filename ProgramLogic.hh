@@ -8,11 +8,11 @@ using namespace std;
 class ProgramLogic
 {
     private:
-        vector<Provider> providers;
-        vector<Optics> optics;
+        void showAvailableProviders();
+        void addProviders();
     public:
         ProgramLogic();
         ProgramLogic(int temp1, int temp2);
-        int mainMenu();
+        void mainMenu();
 };
 #endif

@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Provider.hh"
 using namespace std;
-
 Provider::Provider() {}
 Provider::Provider(string bulstat, string name, string location, string phoneNumber)
 {

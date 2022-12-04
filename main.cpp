@@ -4,6 +4,7 @@
 #include "ProgramLogic.hh"
 using namespace std;
 int main () {
-	cout << "Hello world" << "\n";
+	ProgramLogic progLog;
+	progLog.mainMenu();
 	return 0;
 }
