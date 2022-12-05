@@ -1,7 +1,6 @@
 #ifndef HH_PROVIDER
 #define HH_PROVIDER
 #include <iostream>
-#include "Optics.hh"
 using namespace std;
 
 class Provider

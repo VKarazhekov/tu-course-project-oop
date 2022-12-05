@@ -2,6 +2,7 @@
 #define HH_PROGRAMLOGIC
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "models/Optics.hh"
 #include "models/Provider.hh"
 using namespace std;

@@ -42,3 +42,11 @@ string Optics::getName()
 {
     return name;
 }
+void Optics::addProvider(Provider provider)
+{
+    providers.push_back(provider);
+}
+vector<Provider> Optics::getProviders()
+{
+    return providers;
+}
