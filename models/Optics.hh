@@ -8,9 +8,9 @@ using namespace std;
 class Optics
 {
     private:
-        string type;
         float thickness;
         float dioptre;
+        string type;
         string name;
         vector<Provider> providers;
     public:

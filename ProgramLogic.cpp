@@ -47,7 +47,7 @@ void addOptics()
         string tempName;
         while(true)
         {
-            cout << "Enter the type of optics #" << numOfOptics << ": ";
+            cout << "Enter the type of optics #" << i+1 << ": ";
             cin >> tempType;
             if(tempType.length()<2 || tempType.length()>10)
             {
@@ -57,7 +57,7 @@ void addOptics()
         }
         while(true)
         {
-            cout << "Enter the thickness of optics #" << numOfOptics << ": ";
+            cout << "Enter the thickness of optics #" << i+1 << ": ";
             cin >> tempThickness;
             if(tempThickness<0 || tempThickness>1)
             {
@@ -67,27 +67,28 @@ void addOptics()
         }
         while(true)
         {
-            cout << "Enter the dioptre of optics #" << numOfOptics << ": ";
+            cout << "Enter the dioptre of optics #" << i+1 << ": ";
             cin >> tempDioptre;
             if(tempDioptre<0 || tempDioptre>4)
             {
                 cout << "Invalid input detected. Please enter a floating point number between 0 and 4.\n";
             }
             else break; 
-        }
+        }   
+        
         while(true)
         {
-            cout << "Enter the name of optics #" << numOfOptics << ": ";
+            cout << "Enter the name of optics #" << i+1 << ": ";
             cin >> tempName;
             if(tempName.length()<2 || tempName.length()>20)
             {
-                cout << "Invalid input detected. Please enter a string of characters between 2 and 20.\n";
+                cout << "Invalid input detected. Please enter a string of characters with a length between 2 and 20.\n";
             }
             else break;
         }
         Optics tempOptics(tempType, tempThickness, tempDioptre, tempName);
         int choice = 0;
-        while(choice != providers.size()+1)
+        while(true)
         {
             while(true)
             {
@@ -105,23 +106,32 @@ void addOptics()
                 }
                 else break;
             }
-            //CHECK FOR BUGS
-            for (int d = 0; d < tempOptics.getProviders().size(); d++)
+            if (choice == providers.size()+1) break;
+            if(tempOptics.getProviders().empty())
             {
-                if(tempOptics.getProviders()[d].getName() == providers[choice-1].getName())
+                tempOptics.addProvider(providers[choice-1]);
+            }
+            else
+            {
+                for (int d = 0; d < tempOptics.getProviders().size(); d++)
                 {
-                    cout << "You have already chosen" << 
-                    providers[choice-1].getName() << 
-                    "to be able to offer optics " << tempName <<
-                    endl;
-                }
-                else
-                {
-                    tempOptics.addProvider(providers[choice-1]);
+                    
+                    //if(tempOptics.getProviders()[d].getName() == providers[choice-1].getName())
+                    if((tempOptics.getProviders()[d].getName().compare(providers[choice-1].getName()))==0)
+                    {
+                        cout << "You have already chosen " << 
+                        providers[choice-1].getName() << 
+                        " to be able to offer optics " << tempName <<
+                        endl;
+                    }
+                    else
+                    {
+                        tempOptics.addProvider(providers[choice-1]);
+                    }
                 }
             }
+            optics.push_back(tempOptics);
         }
-        optics.push_back(tempOptics);
     }
 }
 void ProgramLogic::showAvailableProviders()
