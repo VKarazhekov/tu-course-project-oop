@@ -3,12 +3,13 @@
 using namespace std;
 
 Optics::Optics(){}
-Optics::Optics(string type, float thickness, float dioptre, string name)
+Optics::Optics(string type, float thickness, float dioptre, string name, double price)
 {
     this->type=type;
     this->thickness=thickness;
     this->dioptre=dioptre;
     this->name=name;
+    this->price=price;
 }
 void Optics::setType(string type)
 {
@@ -42,11 +43,19 @@ string Optics::getName()
 {
     return name;
 }
-void Optics::addProvider(Provider provider)
+void Optics::setPrice(double price)
 {
-    providers.push_back(provider);
+    this->price=price;
 }
-vector<Provider> Optics::getProviders()
+double Optics::getPrice()
 {
-    return providers;
+    return price;
 }
+// void Optics::addProvider(Provider provider)
+// {
+//     providers.push_back(provider);
+// }
+// vector<Provider> Optics::getProviders()
+// {
+//     return providers;
+// }

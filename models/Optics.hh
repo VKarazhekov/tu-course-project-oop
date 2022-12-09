@@ -2,7 +2,7 @@
 #define HH_OPTICS
 #include <iostream>
 #include <vector>
-#include "Provider.hh"
+//#include "Provider.hh"
 using namespace std;
 
 class Optics
@@ -10,12 +10,13 @@ class Optics
     private:
         float thickness;
         float dioptre;
+        double price;
         string type;
         string name;
-        vector<Provider> providers;
+        //vector<Provider> providers;
     public:
         Optics();
-        Optics(string type, float thickness, float dioptre, string name);
+        Optics(string type, float thickness, float dioptre, string name, double price);
         void setType(string type);
         string getType();
         void setThickness(float thickness);
@@ -24,8 +25,10 @@ class Optics
         float getDioptre();
         void setName(string name);
         string getName();
-        void addProvider(Provider provider);
-        vector<Provider> getProviders();
+        void setPrice(double price);
+        double getPrice();
+        //void addProvider(Provider provider);
+        //vector<Provider> getProviders();
 };
 
 #endif

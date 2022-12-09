@@ -41,3 +41,11 @@ string Provider::getPhoneNumber()
 {
     return phoneNumber;
 }
+void Provider::addOptics(Optics optics)
+{
+    this->optics.push_back(optics);
+}
+vector<Optics> Provider::getOptics()
+{
+    return optics;
+}
