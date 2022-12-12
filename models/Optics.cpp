@@ -43,7 +43,7 @@ string Optics::getName()
 {
     return name;
 }
-void Optics::setPrice(double price)
+void Optics::setPrice(double &price)
 {
     this->price=price;
 }
@@ -51,11 +51,3 @@ double Optics::getPrice()
 {
     return price;
 }
-// void Optics::addProvider(Provider provider)
-// {
-//     providers.push_back(provider);
-// }
-// vector<Provider> Optics::getProviders()
-// {
-//     return providers;
-// }

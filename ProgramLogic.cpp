@@ -3,9 +3,10 @@ using namespace std;
 vector<Provider> providers;
 vector<Optics> optics;
 ProgramLogic::ProgramLogic(){}
-ProgramLogic::ProgramLogic(int temp1, int temp2)
+ProgramLogic::ProgramLogic(Provider prov1, Optics optics1)
 {
-    
+    providers.push_back(prov1);
+    optics.push_back(optics1);
 }
 bool checkInteger(string input)
 {
@@ -28,22 +29,22 @@ bool checkInteger(string input)
 }
 void ProgramLogic::addOptics()
 {
-    string numOfOptics;
-    while(true)
-    {
-        cout << "Enter how many optics you wish to add: ";
-        cin >> numOfOptics;
-        if(checkInteger(numOfOptics)==false || stoi(numOfOptics) < 1)
-        {
-            cout << "Invalid input detected. Please enter a whole number, greater than 0.\n";
-        }
-        else break;
-    }
+    string numOfOptics="1";
+    // while(true)
+    // {
+    //     cout << "Enter how many optics you wish to add: ";
+    //     cin >> numOfOptics;
+    //     if(checkInteger(numOfOptics)==false || stoi(numOfOptics) < 1)
+    //     {
+    //         cout << "Invalid input detected. Please enter a whole number, greater than 0.\n";
+    //     }
+    //     else break;
+    // } BAD APPROACH
     for (int i = 0; i < stoi(numOfOptics); i++)
     {
         float tempThickness;
         float tempDioptre;
-        double tempPrice;
+        double tempPrice=0;
         string tempType;
         string tempName;
         while(true)
@@ -111,7 +112,6 @@ void ProgramLogic::addOptics()
         Optics tempOptics(tempType, tempThickness, tempDioptre, tempName, tempPrice);
         optics.push_back(tempOptics);
         int choice = 0;
-        int d = 0; //black magic
         while(true)
         {
             while(true)
@@ -121,7 +121,6 @@ void ProgramLogic::addOptics()
                 {
                     cout << c+1 << " - " << providers[c].getName() << endl;
                 }
-                //TO DO: add price input
                 cout << providers.size()+1 << " - Done\n";
                 cout << "Enter choice: ";
                 cin >> choice; 
@@ -138,7 +137,7 @@ void ProgramLogic::addOptics()
             }
             else
             {
-                for (; d < providers[choice-1].getOptics().size(); d++)
+                for (int d = 0; d < providers[choice-1].getOptics().size(); d++)
                 {
                     if(providers[choice-1].getOptics()[d].getName() == tempName)
                     {
@@ -148,7 +147,6 @@ void ProgramLogic::addOptics()
                     else
                     {
                         providers[choice-1].addOptics(tempOptics);
-                        d++; //TO DO: debug!!!!!!!!!!!!
                         break;
                     }
                 }

@@ -15,7 +15,7 @@ class ProgramLogic
         void placeOrder();
     public:
         ProgramLogic();
-        ProgramLogic(int temp1, int temp2);
+        ProgramLogic(Provider prov1, Optics optics1);
         void mainMenu();
 };
 #endif

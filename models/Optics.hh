@@ -23,10 +23,8 @@ class Optics
         float getDioptre();
         void setName(string name);
         string getName();
-        void setPrice(double price);
+        void setPrice(double &price);
         double getPrice();
-        //void addProvider(Provider provider);
-        //vector<Provider> getProviders();
 };
 
 #endif
