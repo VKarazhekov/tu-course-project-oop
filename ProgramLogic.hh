@@ -11,6 +11,8 @@ class ProgramLogic
     private:
         void showAvailableProviders();
         void addProviders();
+        void addOptics();
+        void placeOrder();
     public:
         ProgramLogic();
         ProgramLogic(int temp1, int temp2);

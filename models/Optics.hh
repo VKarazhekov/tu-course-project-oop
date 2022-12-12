@@ -2,7 +2,6 @@
 #define HH_OPTICS
 #include <iostream>
 #include <vector>
-//#include "Provider.hh"
 using namespace std;
 
 class Optics
@@ -13,7 +12,6 @@ class Optics
         double price;
         string type;
         string name;
-        //vector<Provider> providers;
     public:
         Optics();
         Optics(string type, float thickness, float dioptre, string name, double price);

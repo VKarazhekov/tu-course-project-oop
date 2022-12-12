@@ -26,7 +26,7 @@ bool checkInteger(string input)
     }
     return true;
 }
-void addOptics()
+void ProgramLogic::addOptics()
 {
     string numOfOptics;
     while(true)
@@ -166,15 +166,23 @@ void ProgramLogic::showAvailableProviders()
         "\tName: " << providers[i].getName() << endl <<
         "\tLocation: " << providers[i].getLocation() << endl <<
         "\tphoneNumber: " << providers[i].getPhoneNumber() << "\n\n";
-        cout << "\tOptics for provider "<<providers[i].getName()<<":\n";
-        for (int c = 0; c < providers[i].getOptics().size(); c++)
+        if(providers[i].getOptics().empty())
         {
-            cout << "\t\tType: "<<optics[c].getType()<<"\n"<<
-            "\t\tThickness: "<<optics[c].getThickness()<<"\n"<<
-            "\t\tDioptre: "<<optics[c].getDioptre()<<"\n"<<
-            "\t\tName: "<<optics[c].getName()<<"\n"<<
-            "\t\tPrice: "<<optics[c].getPrice()<<"\n";
-            cout << endl;
+            continue;
+        }
+        else
+        {
+            cout << "Optics for provider "<<providers[i].getName()<<":\n";
+            for (int c = 0; c < providers[i].getOptics().size(); c++)
+            {
+                cout << "\tOptics #"<< c+1 <<":\n" \
+                "\t\tType: "<<optics[c].getType()<<"\n"<< \
+                "\t\tThickness: "<<optics[c].getThickness()<<"\n"<< \
+                "\t\tDioptre: "<<optics[c].getDioptre()<<"\n"<< \
+                "\t\tName: "<<optics[c].getName()<<"\n"<< \
+                "\t\tPrice: "<<optics[c].getPrice()<<"\n";
+                cout << endl;
+            }
         }
     }
     
@@ -243,6 +251,68 @@ void ProgramLogic::addProviders()
         cout << endl;
     }
 }
+void ProgramLogic::placeOrder()
+{
+    int providerChoice = 0, opticsChoice = 0;
+    double totalPrice = 0;
+    bool providerIsPresent = 0, opticsIsPresent = false;
+    while(true)
+    {
+        while(true)
+        {
+            showAvailableProviders();
+            cout<<"\nEnter the number of provider you have chosen: ";
+            cin>>providerChoice;
+            if((providerChoice-1) < 0 || (providerChoice-1) >= providers.size())
+            {
+                cout << "Invalid input detected. Please enter a whole number between 1 and "<<providers.size()<<".\n";
+            }
+            else break;
+        }
+        for (int i = 0; i < providers.size(); i++)
+        {
+            if(providers[i].getName()==providers[providerChoice-1].getName())
+            {
+                providerIsPresent = true;
+                cout<<"\nI ENTERED HERE!!\n";
+            }
+        }
+        if(providerIsPresent) break;
+        else cout<<"Provider with number "<<providerChoice<<" not found, please choose again.\n";
+    }
+    while(true)
+    {
+        cout<<"Optics being offered from provider "<<providers[providerChoice-1].getName()<<":\n";
+        for (int i = 0; i < providers[providerChoice-1].getOptics().size(); i++)
+        {
+            cout << "Optics #"<< i+1 <<":\n" \
+            "\t\tType: "<<optics[i].getType()<<"\n"<< \
+            "\t\tThickness: "<<optics[i].getThickness()<<"\n"<< \
+            "\t\tDioptre: "<<optics[i].getDioptre()<<"\n"<< \
+            "\t\tName: "<<optics[i].getName()<<"\n"<< \
+            "\t\tPrice: "<<optics[i].getPrice()<<"\n";
+            cout << endl;
+        }
+        cout<<"Your order's price up to now: "<<totalPrice<<"\nEnter the number of the optics you want to order(or enter 0 to finish order): ";
+        cin>>opticsChoice;
+        for (int i = 0; i < providers[providerChoice-1].getOptics().size(); i++)
+        {
+            if(providers[providerChoice-1].getOptics()[i].getName()==providers[providerChoice-1].getOptics()[opticsChoice-1].getName())
+            {
+                opticsIsPresent = true;
+                totalPrice += providers[providerChoice-1].getOptics()[i].getPrice();
+                cout<<"Your order's price up to now: "<<totalPrice<<"\n";
+                break;
+            }
+        }
+        if(opticsChoice==0)
+        {
+            cout<<"Total price for order: "<<totalPrice<<"\n";
+            break;
+        }
+        else if(!opticsIsPresent) cout<<"Optics with number "<<opticsChoice<<" not found, please enter choice again.\n";
+    }
+}
 void ProgramLogic::mainMenu()
 {
     int choice = 0;
@@ -268,7 +338,7 @@ void ProgramLogic::mainMenu()
                 addOptics();
                 break;
             case 4:
-                //call a function to choose provider and calculate order price
+                placeOrder();
                 break;
             case 5:
                 return;
