@@ -3,6 +3,10 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <fstream>
+#include <bits/stdc++.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include "models/Optics.hh"
 #include "models/Provider.hh"
 using namespace std;

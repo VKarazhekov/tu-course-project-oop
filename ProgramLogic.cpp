@@ -311,6 +311,52 @@ void ProgramLogic::placeOrder()
         else if(!opticsIsPresent) cout<<"Optics with number "<<opticsChoice<<" not found, please enter choice again.\n";
     }
 }
+char* stringToCharArr(string input)
+{
+    char* char_array = new char[input.length() + 1];
+    strcpy(char_array, input.c_str());
+    return char_array;
+}
+void writeToFile()
+{
+    if (mkdir("SavedData", 0777) == -1)
+    {
+        cerr << "Error :  " << strerror(errno) << endl;
+    }
+    else
+    {
+        cout << "Directory SavedData created\n";
+    }
+    for (int i = 0; i < providers.size(); i++)
+    {
+        char tempDir[30] = "./SavedData/";
+        strcat(tempDir, stringToCharArr(providers[i].getName()));
+        if (mkdir(tempDir, 0777) == -1)
+        {
+            cerr << "Error :  " << strerror(errno) << endl;
+        }
+        else
+        {
+            cout << "Directory "+providers[i].getName()+" created\n";
+        }
+        ofstream tempFile;
+        tempFile.open("./SavedData/"+providers[i].getName()+"/"+providers[i].getName()+".txt");
+        tempFile << providers[i].getName() << endl;
+        tempFile << providers[i].getBulstat() << endl;
+        tempFile << providers[i].getLocation() << endl;
+        tempFile << providers[i].getPhoneNumber() << endl;
+        for (int j = 0; j < providers[i].getOptics().size(); j++)
+        {
+            tempFile << providers[i].getOptics()[i].getName() << endl;
+            tempFile << providers[i].getOptics()[i].getDioptre() << endl;
+            tempFile << providers[i].getOptics()[i].getPrice() << endl;
+            tempFile << providers[i].getOptics()[i].getThickness() << endl;
+            tempFile << providers[i].getOptics()[i].getType() << endl;
+        }
+        
+    }
+    
+}
 void ProgramLogic::mainMenu()
 {
     int choice = 0;
@@ -339,6 +385,7 @@ void ProgramLogic::mainMenu()
                 placeOrder();
                 break;
             case 5:
+                writeToFile();
                 return;
             default:
                 cout << "Invalid input detected. Please enter a number between 1 and 5 inclusive.\n";
